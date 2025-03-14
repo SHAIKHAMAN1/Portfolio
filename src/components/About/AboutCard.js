@@ -8,33 +8,51 @@ function AboutCard() {
       <Card.Body>
         <blockquote className="blockquote mb-0">
           <p style={{ textAlign: "justify" }}>
-            Hi Everyone, I am <span className="purple">Soumyajit Behera </span>
-            from <span className="purple"> Bhubaneswar, India.</span>
+            👋 Hey there! I’m  
+            <span
+              style={{
+                background: "linear-gradient(to right, #ff6a00, #ee0979)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                fontWeight: "bold" 
+                
+              }}
+              className="purple"
+            >
+              {" "}Shaikh Aman
+            </span>, a passionate 
+            <b className="purple"> Software Developer </b>  
+            from <span className="purple">Pune, India.</span> 🇮🇳
             <br />
-            I am currently employed as a software developer at Juspay.
             <br />
-            I have completed Integrated MSc (IMSc) in Maths and Computing at BIT
-            Mesra.
+            🚀 I’m currently pursuing my Bachelor’s in Computer Science & Engineering (AI & DS) at DYPIEMR.
+            With a CGPA of <span style={{ fontWeight: "bold" }}> 8.33</span>,
             <br />
             <br />
-            Apart from coding, some other activities that I love to do!
+            🔥 My tech stack includes: 
+            <b className="purple"> C++, JavaScript, React, Next.js, and MERN Stack. </b>  
+            I’m always excited about building innovative solutions and learning new technologies.  
+            Currently, I’m enhancing my skills in MERN Stack Development.  
+            <br />
+            <br />
+            🎯 Beyond coding, I love:
           </p>
           <ul>
             <li className="about-activity">
-              <ImPointRight /> Playing Games
+              <ImPointRight /> 🎮 Playing Competitive Games
             </li>
             <li className="about-activity">
-              <ImPointRight /> Writing Tech Blogs
+              <ImPointRight /> ✈️ Traveling & Exploring New Places
             </li>
             <li className="about-activity">
-              <ImPointRight /> Travelling
+              <ImPointRight /> 💡 Learning New Technologies & AI Trends
             </li>
           </ul>
 
-          <p style={{ color: "rgb(155 126 172)" }}>
-            "Strive to build things that make a difference!"{" "}
+          <p style={{ color: "rgb(155 126 172)", fontStyle: "italic", fontSize: "1.2em" }}>
+            "Strive to build things that make a difference and leave an impact!"
           </p>
-          <footer className="blockquote-footer">Soumyajit</footer>
+          <footer className="blockquote-footer">Shaikh Aman</footer>
         </blockquote>
       </Card.Body>
     </Card>
