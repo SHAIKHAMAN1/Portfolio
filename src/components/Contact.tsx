@@ -5,12 +5,40 @@ import { Github, Linkedin, Twitter, Mail, Send } from "lucide-react";
 const Contact = () => {
   const [showForm, setShowForm] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
   const socialLinks = [
     { icon: Github, href: "https://github.com/SHAIKHAMAN1", label: "GitHub" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/shaikh-aman-548958257/", label: "LinkedIn" }
+    { icon: Twitter, href: "#", label: "Twitter" }, // Replace with real link
+    { icon: Linkedin, href: "https://www.linkedin.com/in/shaikh-aman-548958257/", label: "LinkedIn" },
   ];
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    const formData = new FormData(e.target);
+
+    try {
+      const response = await fetch("https://formspree.io/f/xanbyvrl", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setFormSubmitted(true);
+        e.target.reset();
+      } else {
+        const result = await response.json();
+        setError(result?.message || "Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.");
+    }
+  };
 
   return (
     <section id="contact" className="py-20 relative overflow-hidden">
@@ -23,8 +51,7 @@ const Contact = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center max-w-4xl mx-auto animate-fade-in">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-            Ready to take <span className="text-gradient">your digital presence</span>{" "}
-            to the next level?
+            Ready to take <span className="text-gradient">your digital presence</span> to the next level?
           </h2>
 
           <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
@@ -44,12 +71,10 @@ const Contact = () => {
             </Button>
           </div>
 
-          {/* Formspree Form */}
+          {/* Contact Form */}
           {showForm && !formSubmitted && (
             <form
-              action="https://formspree.io/f/xzzvboab"
-              method="POST"
-              onSubmit={() => setFormSubmitted(true)}
+              onSubmit={handleSubmit}
               className="bg-muted p-6 rounded-xl shadow-lg max-w-xl mx-auto mb-16 animate-fade-in"
             >
               <div className="mb-4 text-left">
@@ -72,20 +97,24 @@ const Contact = () => {
                 />
               </div>
 
+              {error && (
+                <p className="text-red-500 font-medium mb-4">{error}</p>
+              )}
+
               <Button type="submit" className="w-full">
                 Send
               </Button>
             </form>
           )}
 
-          {/* Form submission message */}
+          {/* Form submission success message */}
           {formSubmitted && (
             <p className="text-green-500 font-semibold mb-8">
               ✅ Thank you! Your message has been sent.
             </p>
           )}
 
-          {/* Social Links */}
+          {/* Social Media Links */}
           <div className="flex justify-center space-x-6 mb-12">
             {socialLinks.map((social) => (
               <a
