@@ -1,17 +1,16 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Twitter, Mail, Send } from "lucide-react";
 
 const Contact = () => {
-  const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Twitter, href: "#", label: "Twitter" }, 
-    { icon: Linkedin, href: "#", label: "LinkedIn" }
-  ];
+  const [showForm, setShowForm] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText("aryan.tele@example.com");
-    // You could add a toast notification here
-  };
+  const socialLinks = [
+    { icon: Github, href: "https://github.com/SHAIKHAMAN1", label: "GitHub" },
+    { icon: Twitter, href: "#", label: "Twitter" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/shaikh-aman-548958257/", label: "LinkedIn" }
+  ];
 
   return (
     <section id="contact" className="py-20 relative overflow-hidden">
@@ -27,16 +26,17 @@ const Contact = () => {
             Ready to take <span className="text-gradient">your digital presence</span>{" "}
             to the next level?
           </h2>
-          
+
           <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
             Reach out to me today and let's discuss how I can help you achieve your goals.
           </p>
-          
+
+          {/* Contact Button */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="gradient-primary glow-primary hover:scale-105 transition-all duration-300"
-              onClick={copyEmail}
+              onClick={() => setShowForm(!showForm)}
             >
               <Mail className="mr-2 h-5 w-5" />
               Let's get in touch
@@ -44,12 +44,55 @@ const Contact = () => {
             </Button>
           </div>
 
+          {/* Formspree Form */}
+          {showForm && !formSubmitted && (
+            <form
+              action="https://formspree.io/f/xzzvboab"
+              method="POST"
+              onSubmit={() => setFormSubmitted(true)}
+              className="bg-muted p-6 rounded-xl shadow-lg max-w-xl mx-auto mb-16 animate-fade-in"
+            >
+              <div className="mb-4 text-left">
+                <label className="block mb-1 font-medium">Your email</label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  className="w-full px-4 py-2 rounded-md border border-border bg-background"
+                />
+              </div>
+
+              <div className="mb-4 text-left">
+                <label className="block mb-1 font-medium">Your message</label>
+                <textarea
+                  name="message"
+                  required
+                  rows={4}
+                  className="w-full px-4 py-2 rounded-md border border-border bg-background"
+                />
+              </div>
+
+              <Button type="submit" className="w-full">
+                Send
+              </Button>
+            </form>
+          )}
+
+          {/* Form submission message */}
+          {formSubmitted && (
+            <p className="text-green-500 font-semibold mb-8">
+              ✅ Thank you! Your message has been sent.
+            </p>
+          )}
+
           {/* Social Links */}
           <div className="flex justify-center space-x-6 mb-12">
             {socialLinks.map((social) => (
               <a
                 key={social.label}
                 href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-12 h-12 bg-secondary hover:bg-primary group rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg"
                 aria-label={social.label}
               >

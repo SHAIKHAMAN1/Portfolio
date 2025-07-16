@@ -22,7 +22,7 @@ const Hero = () => {
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Hi, I'm Aryan Tele, AI Developer based in India
+            Hi, I'm Shaikh Aman, Software Developer based in India
           </p>
           
           <Button 
