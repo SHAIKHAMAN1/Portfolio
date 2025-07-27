@@ -42,6 +42,16 @@ const Projects = () => {
       liveUrl: "#",
       githubUrl: "https://github.com/SHAIKHAMAN1/Subscription-Tracker",
     },
+    {
+      title: "Intervue (AI Interview App)",
+      description:
+       "Intervue is an AI-powered interview platform built using Next.js, Supabase, and Vapi. It allows users to conduct realistic, voice-based mock interviews where an AI acts as the interviewer. The app generates dynamic, job-specific questions and provides instant feedback, helping candidates prepare effectively for real-world interviews.",
+      image: "/images/5.jpeg",
+      tags: ["Next.js", "Supabase", "Vapi", "OpenAI"],
+      liveUrl: "https://intervue-sh.vercel.app/dashboard",
+      githubUrl: "https://github.com/SHAIKHAMAN1/Intervue",
+},
+
   ];
 
   return (
