@@ -48,7 +48,7 @@ const Projects = () => {
        "Intervue is an AI-powered interview platform built using Next.js, Supabase, and Vapi. It allows users to conduct realistic, voice-based mock interviews where an AI acts as the interviewer. The app generates dynamic, job-specific questions and provides instant feedback, helping candidates prepare effectively for real-world interviews.",
       image: "/images/5.jpg",
       tags: ["Next.js", "Supabase", "Vapi", "OpenAI"],
-      liveUrl: "https://intervue-sh.vercel.app/dashboard",
+      liveUrl: "https://interviewue.vercel.app/",
       githubUrl: "https://github.com/SHAIKHAMAN1/Intervue",
 },
 
