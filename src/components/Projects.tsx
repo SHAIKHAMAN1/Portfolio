@@ -51,6 +51,15 @@ const Projects = () => {
       liveUrl: "https://interviewue.vercel.app/",
       githubUrl: "https://github.com/SHAIKHAMAN1/Intervue",
 },
+    {
+  title: "PG Finder (Accommodation Booking App)",
+  description:
+    "PG Finder is a full-stack web application designed to help users find and book paying guest accommodations بسهولة. Built using the MERN stack, it allows users to browse listings, view detailed PG information, filter based on preferences like location, price, and amenities, and contact owners directly. The platform also includes authentication, user dashboards, and responsive UI for a seamless experience.",
+  image: "/images/6.jpg",
+  tags: ["MongoDB", "Express.js", "React.js", "Node.js"],
+  liveUrl: "https://pgwale.vercel.app/",
+  githubUrl: "https://github.com/SHAIKHAMAN1/pg-rental-frontend",
+},
 
   ];
 
