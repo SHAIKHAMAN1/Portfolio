@@ -3,121 +3,157 @@
 @tailwind utilities;
 
 /* -----------------------------
-   DESIGN SYSTEM VARIABLES
+   DESIGN SYSTEM — Gold + Black Premium
 ------------------------------ */
 @layer base {
   :root {
-    --background: 220 27% 8%;
-    --foreground: 210 40% 98%;
-    --card: 220 20% 12%;
-    --card-foreground: 210 40% 98%;
+    --background: 0 0% 4%;
+    --foreground: 0 0% 93%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 93%;
 
-    --primary: 263 70% 50%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 48 96% 53%;
+    --primary-foreground: 0 0% 4%;
 
-    --secondary: 220 15% 18%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 83%;
 
-    --muted: 220 15% 15%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 0 0% 9%;
+    --muted-foreground: 240 5% 65%;
 
-    --accent: 263 70% 50%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 45 93% 47%;
+    --accent-foreground: 0 0% 4%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 0 0% 95%;
 
-    --border: 220 15% 18%;
-    --input: 220 15% 18%;
-    --ring: 263 70% 50%;
+    --border: 0 0% 14%;
+    --input: 0 0% 12%;
+    --ring: 48 96% 53%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(263 70% 50%), hsl(280 80% 60%));
-    --shadow-card: 0 8px 32px hsl(220 27% 8% / 0.6);
-    --glow-primary: 0 0 40px hsl(263 70% 50% / 0.3);
-
-    --radius: 0.75rem;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --border: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --radius: 0.5rem;
   }
 
   * {
     @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  .gradient-primary {
-    background: var(--gradient-primary);
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: hsl(0 0% 4%); }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(48 96% 53% / 0.3);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(48 96% 53% / 0.5);
   }
 
-  .shadow-card {
-    box-shadow: var(--shadow-card);
+  /* Selection */
+  ::selection {
+    background: hsl(48 96% 53% / 0.2);
+    color: hsl(0 0% 98%);
   }
 
-  .glow-primary {
-    box-shadow: var(--glow-primary);
+  /* Tech badge */
+  .tech-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.7rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    background: hsl(0 0% 10%);
+    border: 1px solid hsl(0 0% 16%);
+    color: hsl(240 5% 72%);
+    transition: border-color 0.25s ease, color 0.25s ease;
+  }
+  .tech-badge:hover {
+    border-color: hsl(48 96% 53% / 0.3);
+    color: hsl(48 96% 80%);
   }
 
-  .text-gradient {
-    background: var(--gradient-primary);
+  /* Section divider — subtle gold line */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(48 96% 53% / 0.3), transparent);
+    margin: 0 auto;
+    max-width: 120px;
+  }
+
+  /* Gold text */
+  .text-gold {
+    color: hsl(48 96% 53%);
+  }
+
+  /* Gold gradient text */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(48 96% 53%), hsl(45 93% 47%), hsl(48 96% 70%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+
+  /* Subtle gold glow on hover */
+  .gold-glow {
+    transition: box-shadow 0.3s ease;
+  }
+  .gold-glow:hover {
+    box-shadow: 0 0 30px hsl(48 96% 53% / 0.08);
+  }
+
+  /* Noise texture overlay */
+  .noise-bg::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
 }
 
 /* -----------------------------
-   ANIMATED BORDER EFFECT
+   ANIMATIONS
 ------------------------------ */
 @layer utilities {
-  @keyframes neon-border-glow {
-    0% {
-      box-shadow: 0 0 10px hsl(263 70% 50% / 0.5),
-                  0 0 20px hsl(263 70% 50% / 0.4),
-                  0 0 30px hsl(263 70% 50% / 0.5);
-    }
-    50% {
-      box-shadow: 0 0 20px hsl(263 70% 50% / 0.5),
-                  0 0 30px hsl(263 70% 50% / 0.7),
-                  0 0 40px hsl(263 70% 50% / 0.9);
-    }
-    100% {
-      box-shadow: 0 0 10px hsl(263 70% 50% / 0.3),
-                  0 0 20px hsl(263 70% 50% / 0.4),
-                  0 0 30px hsl(263 70% 50% / 0.5);
-    }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
   }
 
-  .neon-border {
-    position: relative;
-    z-index: 0;
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
   }
 
-  .neon-border::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 0.75rem;
-    border: 2px solid hsl(267, 78%, 31%);
-    z-index: -1;
-    animation: neon-border-glow 2.5s infinite ease-in-out;
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
+
+  .animate-blink { animation: blink 1s step-end infinite; }
+  .animate-shimmer {
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  .animate-float { animation: float 6s ease-in-out infinite; }
+
+  /* 3D perspective for tilt cards */
+  .perspective-\[800px\] { perspective: 800px; }
 }

@@ -9,12 +9,12 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="min-h-screen bg-background overflow-x-hidden noise-bg">
       <Header />
       <Hero />
       <About />
       <Projects />
-      {/* <Experience /> */}
+      <Experience />
       <Approach />
       <Contact />
       <Footer />

@@ -1,15 +1,44 @@
-// components/Projects.tsx
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { useRef } from "react";
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
+
+// 3D Tilt card wrapper
+const TiltCard = ({ children }: { children: React.ReactNode }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0.5);
+  const y = useMotionValue(0.5);
+
+  const rotateX = useSpring(useTransform(y, [0, 1], [8, -8]), { stiffness: 300, damping: 30 });
+  const rotateY = useSpring(useTransform(x, [0, 1], [-8, 8]), { stiffness: 300, damping: 30 });
+
+  const handleMouse = (e: React.MouseEvent) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    x.set((e.clientX - rect.left) / rect.width);
+    y.set((e.clientY - rect.top) / rect.height);
+  };
+
+  const reset = () => { x.set(0.5); y.set(0.5); };
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      onMouseMove={handleMouse}
+      onMouseLeave={reset}
+      className="perspective-[800px]"
+    >
+      {children}
+    </motion.div>
+  );
+};
 
 const Projects = () => {
   const projects = [
     {
-      title: "Spotify(Clone)",
+      title: "Spotify Clone",
       description:
-        "Fully functional music streaming web app built using HTML, CSS, and JavaScript. Features include music playback controls, playlist management, and a responsive UI.",
+        "Music streaming web app with playback controls, playlist management, and responsive UI.",
       image: "/images/1.jpg",
       tags: ["HTML", "CSS", "JavaScript"],
       liveUrl: "#",
@@ -18,16 +47,16 @@ const Projects = () => {
     {
       title: "Portfolio Website",
       description:
-        "A modern portfolio built with Next.js, featuring smooth animations, responsive design, and project showcases.",
+        "A portfolio built with Next.js featuring smooth animations, responsive design, and project showcases.",
       image: "/images/2.png",
       tags: ["Next.js", "React"],
       liveUrl: "#",
       githubUrl: "#",
     },
     {
-      title: "Swiggy",
+      title: "Swiggy Clone",
       description:
-        "Developed a Swiggy clone using React, integrating APIs for browsing restaurants and viewing menu items.",
+        "Food delivery app clone using React with live API integration for restaurant browsing and menu viewing.",
       image: "/images/3.png",
       tags: ["React", "APIs"],
       liveUrl: "#",
@@ -36,108 +65,142 @@ const Projects = () => {
     {
       title: "Subscription Tracker",
       description:
-        "Backend project using Node.js and MongoDB to manage and track user subscriptions via RESTful APIs.",
+        "Backend API for managing user subscriptions with JWT authentication, built on Node.js and MongoDB.",
       image: "/images/4.jpg",
-      tags: ["Node.js", "Express.js", "MongoDB", "Mongoose", "REST API", "JWT Auth"],
+      tags: ["Node.js", "Express.js", "MongoDB", "JWT"],
       liveUrl: "#",
       githubUrl: "https://github.com/SHAIKHAMAN1/Subscription-Tracker",
     },
     {
-      title: "Intervue (AI Interview App)",
+      title: "Intervue",
       description:
-       "Intervue is an AI-powered interview platform built using Next.js, Supabase, and Vapi. It allows users to conduct realistic, voice-based mock interviews where an AI acts as the interviewer. The app generates dynamic, job-specific questions and provides instant feedback, helping candidates prepare effectively for real-world interviews.",
+        "AI-powered mock interview platform with voice-based interviews, dynamic question generation, and instant feedback.",
       image: "/images/5.jpg",
       tags: ["Next.js", "Supabase", "Vapi", "OpenAI"],
       liveUrl: "https://interviewue.vercel.app/",
       githubUrl: "https://github.com/SHAIKHAMAN1/Intervue",
-},
-{
-  title: "PG Finder (Accommodation Booking App)",
-  description:
-    "PG Finder is a full-stack MERN application that helps users find and explore paying guest accommodations. It offers search and filtering based on location, price, and amenities, along with detailed listings and user authentication for a smooth experience.",
-  image: "/images/6.jpeg",
-  tags: ["MongoDB", "Express.js", "React.js", "Node.js"],
-  liveUrl: "https://pgwale.vercel.app/",
-  githubUrl: "https://github.com/SHAIKHAMAN1/pg-rental-frontend",
-}
-
+    },
+    {
+      title: "PG Finder",
+      description:
+        "Full-stack MERN app to find paying guest accommodations with search, filtering, and user authentication.",
+      image: "/images/6.jpeg",
+      tags: ["MongoDB", "Express.js", "React.js", "Node.js"],
+      liveUrl: "https://pgwale.vercel.app/",
+      githubUrl: "https://github.com/SHAIKHAMAN1/pg-rental-frontend",
+    },
+    {
+      title: "Perfume E-Commerce",
+      description:
+        "Full-stack online store with product browsing, cart, wishlist, admin panel, and Razorpay payment integration.",
+      image: "/images/7.png",
+      tags: ["Next.js", "MongoDB", "Firebase", "Razorpay"],
+      liveUrl: "https://luxeure.vercel.app/",
+      githubUrl: "https://github.com/SHAIKHAMAN1/your-repo-name",
+    },
   ];
 
   return (
-    <section id="projects" className="py-20 relative">
+    <section id="projects" className="py-28 relative">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            A small collection of <span className="text-gradient">My Recent Projects</span>
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+          className="mb-16"
+        >
+          <p className="text-xs uppercase tracking-[0.2em] text-primary font-medium mb-3">Projects</p>
+          <h2 className="text-2xl md:text-4xl font-bold" style={{ fontFamily: "'Outfit', sans-serif" }}>
+            Things I've built
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Here are some of my recent projects that showcase my skills in web development.
-          </p>
-        </div>
+          <div className="section-divider mt-6" />
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        {/* Projects grid */}
+        <div className="grid md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
-            <div
+            <motion.div
               key={project.title}
-              className="relative opacity-0 animate-fade-in"
-              style={{
-                animationDelay: `${index * 200}ms`,
-                animationFillMode: "forwards",
-              }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: index * 0.1, type: "spring", damping: 15 }}
             >
-              {/* Glow rotating border dot */}
-              <Card className="group overflow-hidden neon-border shadow-card hover:shadow-2xl transition-all duration-500 border-border/50 bg-card/50 backdrop-blur-sm relative z-10">
-                <div className="border-glow-rotate" />
-
-                <div className="relative overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-60 object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-                    {project.liveUrl !== "#" && (
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                        <Button
-                          size="sm"
-                          variant="secondary"
-                          className="shadow-lg transition-transform duration-300 hover:scale-105"
+              <TiltCard>
+                <div className="bg-card rounded-md border border-border overflow-hidden group hover:border-primary/20 transition-all duration-300 gold-glow">
+                  {/* Image */}
+                  <div className="relative overflow-hidden h-48 sm:h-52 bg-secondary/30">
+                    <motion.img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                      whileHover={{ scale: 1.08 }}
+                      transition={{ duration: 0.6, ease: "easeOut" }}
+                    />
+                    {/* Shine effect on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-[hsl(0_0%_4%/0.75)] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-3">
+                      {project.liveUrl !== "#" && (
+                        <motion.a
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-primary-foreground text-xs font-semibold rounded-md hover:bg-primary/90 transition-colors"
                         >
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          Live Site
-                        </Button>
-                      </a>
-                    )}
-                    {project.githubUrl !== "#" && (
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="shadow-lg transition-transform duration-300 hover:scale-105"
+                          <ExternalLink className="w-3 h-3" />
+                          Live
+                        </motion.a>
+                      )}
+                      {project.githubUrl !== "#" && (
+                        <motion.a
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-4 py-2 bg-secondary border border-border text-foreground text-xs font-semibold rounded-md hover:bg-secondary/80 transition-colors"
                         >
-                          <Github className="w-4 h-4 mr-2" />
+                          <Github className="w-3 h-3" />
                           Code
-                        </Button>
-                      </a>
-                    )}
+                        </motion.a>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-5">
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <h3 className="text-sm font-semibold group-hover:text-primary transition-colors">{project.title}</h3>
+                      <div className="flex gap-2 flex-shrink-0">
+                        {project.githubUrl !== "#" && (
+                          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
+                            className="text-muted-foreground hover:text-primary transition-colors">
+                            <Github className="w-3.5 h-3.5" />
+                          </a>
+                        )}
+                        {project.liveUrl !== "#" && (
+                          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
+                            className="text-muted-foreground hover:text-primary transition-colors">
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                    <p className="text-muted-foreground text-xs mb-3 leading-relaxed line-clamp-2">{project.description}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.tags.map((tag) => (
+                        <span key={tag} className="tech-badge">{tag}</span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">
-                    {project.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-xs">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+              </TiltCard>
+            </motion.div>
           ))}
         </div>
       </div>
