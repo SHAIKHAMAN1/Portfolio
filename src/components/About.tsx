@@ -53,7 +53,7 @@ const About = () => {
 
   const stats = [
     { value: 7, label: "Projects", suffix: "+" },
-    { value: 5, label: "Internships", suffix: "+" },
+    { value: 1, label: "Internships", suffix: "" },
     { value: 2, label: "Years Learning", suffix: "+" },
   ];
 
